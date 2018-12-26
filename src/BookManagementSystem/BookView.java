@@ -189,11 +189,19 @@ public class BookView {
 		//判断书是否存在
 		Book newBook = bookBiz.findBookByIsbn(isbn);
 		if(newBook == null) {
+			String bookId = null;
 			newBook = new Book();           //**增加全新的对象时，需要新实例化**
 			System.out.print("书名：");
 			newBook.setBookName(input.next());
 			System.out.print("编号Id：");
-			newBook.setBookId(input.next());
+			bookId = input.next();
+			if(null == bookBiz.findBookByBookId(bookId)) {
+				newBook.setBookId(bookId);
+			}else {
+				System.out.println("输入的编号Id已存在，请重新确认后输入");
+				mianView();
+			}
+			
 			System.out.print("数量：");
 			newBook.setBookCount(input.nextInt());
 			System.out.print("价格：");
@@ -269,6 +277,10 @@ public class BookView {
 		}
 	}
 	
+	/**
+	 * 通过bookId一览次bookId的书籍
+	 * @param bookId
+	 */
 	public void showBooksByBookId(String bookId) {
 		int bookCount = bookBiz.getBookCount();
 		System.out.println("书籍名称\t编号Id\t数量\t价格\tisbn");

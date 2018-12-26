@@ -3,8 +3,12 @@ package BookManagementSystem;
 public class BookTest {
 
 	public static void main(String[] args) {
+		abstractBookView bookView = new BookViewDialogImpl();
+		bookView.userChoice();
 		
-		new BookView();
+//		abstractBookView bookView1 = new BookViewConsoleImpl();
+//		bookView1.userChoice();
+//		new BookView();
 //		Book newBook = new Book();
 //		BookBiz bookBiz = new BookBiz();
 //		bookBiz.getBookCount();
