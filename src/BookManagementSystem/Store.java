@@ -18,7 +18,7 @@ public class Store {
 		book1.setBookName("大秦帝国1");
 		book1.setBookCount(2);
 		book1.setBookPrice(56.5);
-		book1.setIsbn("978-7-5063-8010-2");
+		book1.setIsbn("1-1");
 		BookStore[0] = book1;
 		
 		Book book2 = new Book();
@@ -27,7 +27,7 @@ public class Store {
 		book2.setBookName("大秦帝国2");
 		book2.setBookCount(3);
 		book2.setBookPrice(50.5);
-		book2.setIsbn("978-7-5063-8010-3");
+		book2.setIsbn("1-2");
 		BookStore[1] = book2;
 		
 		Book book3 = new Book();
@@ -36,7 +36,7 @@ public class Store {
 		book3.setBookName("大秦帝国3");
 		book3.setBookCount(7);
 		book3.setBookPrice(58.5);
-		book3.setIsbn("978-7-5063-80105");
+		book3.setIsbn("1-3");
 		BookStore[2] = book3;
 	}
 }

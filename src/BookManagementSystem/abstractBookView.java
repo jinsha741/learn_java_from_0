@@ -43,6 +43,7 @@ public abstract class abstractBookView {
 		default:
 			break;
 		}
+		userChoice();
 	}
 	
 	public abstract String mianView();

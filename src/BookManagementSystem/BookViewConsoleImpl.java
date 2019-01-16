@@ -143,18 +143,26 @@ public class BookViewConsoleImpl extends abstractBookView{
 		Book newBook = bookBiz.findBookByIsbn(isbn);
 		if(newBook == null) {
 			String bookId = null;
-			newBook = new Book();           //**增加全新的对象时，需要新实例化**
-			System.out.print("书名：");
-			newBook.setBookName(input.next());
+			newBook = new Book();           //**增加全新的对象时，需要新实例化**			
+			
 			System.out.print("编号Id：");
 			bookId = input.next();
 			if(null == bookBiz.findBookByBookId(bookId)) {
 				newBook.setBookId(bookId);
 			}else {
 				System.out.println("输入的编号Id已存在，请重新确认后输入");
-				newBook = addBookView();
+				System.out.println("以下显示图库现有的书");
+				showBookNameIdByBookArray(Store.BookStore);
+				
+				/**！！！！！！！！！！！
+				 * BUG！！！！！！
+				 * 输入id判断为错后，出现逻辑错误！！！！！！！！！！
+				 */
+				mianView();         
+				
 			}
-			
+			System.out.print("书名：");
+			newBook.setBookName(input.next());
 			System.out.print("数量：");
 			newBook.setBookCount(input.nextInt());
 			System.out.print("价格：");
@@ -163,14 +171,8 @@ public class BookViewConsoleImpl extends abstractBookView{
 			
 			bookBiz.addBook(newBook);		
 		}else {
-			System.out.print("该书已存在了，继续增加输入y,回主菜单输入n:");
-			String choice = input.next();
-			if("y".equals(choice)) {
-				//重新调用addBookView() 递归
-				newBook = addBookView();
-			}else {
-				mianView();
-			}		
+			System.out.print("该书已存在了，返回菜单重新输入");
+			newBook = addBookView();
 		}
 		return newBook;	
 	}
@@ -223,6 +225,25 @@ public class BookViewConsoleImpl extends abstractBookView{
 		}
 		
 	}
+	
+	public void showBookNameIdByBookArray(Book... BookArray) {
+		int bookCount = bookBiz.getBookCount(BookArray);
+		
+		//如果传入null，则直接打印仓库内容
+		if(BookArray == null) {
+			BookArray = Store.BookStore;
+		}
+		System.out.println();
+		System.out.println("书籍名称\t编号Id");
+		for (int i = 0; i < bookCount; i++) {
+			System.out.printf("%s\t%s",
+					Store.BookStore[i].getBookName(),Store.BookStore[i].getBookId()
+			);
+			System.out.println();
+		}
+		
+	}
+	
 
 	@Override
 	public void showBooksByBookId(String bookId) {
